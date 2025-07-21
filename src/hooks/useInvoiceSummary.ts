@@ -1,0 +1,29 @@
+import useAppSelector from './useAppSelector';
+import { type Invoice } from '../types/invoice';
+import { useMemo } from 'react';
+
+const useInvoiceSummary = () => {
+    const invoices = useAppSelector((state) => state.invoices.invoices);
+    // const selectedMonth = useAppSelector((state) => state.expenses.selectedMonth);
+
+    const totalAmount = invoices.reduce((acc, inv: Invoice) => {
+        const invoiceTotal = inv.items.reduce((sum, item) => sum + item.rate * item.quantity, 0);
+        return acc + invoiceTotal;
+    }, 0);
+    const paidInvoices = useMemo(() => invoices.filter((inv: Invoice) => inv.status === 'paid'), [invoices]);
+    const pendingInvoices = useMemo(() => invoices.filter((inv: Invoice) => inv.status === 'pending'), [invoices]);
+    // const monthlyInvoices = useMemo(
+    //     () => invoices.filter((inv) => inv.date.startsWith(selectedMonth)),
+    //     [invoices, selectedMonth]
+    // );
+
+    return {
+        totalAmount,
+        invoiceCount: invoices.length,
+        paidCount: paidInvoices.length,
+        dueCount: pendingInvoices.length,
+        lastInvoiceDate: invoices.length ? invoices[invoices.length - 1].date : null,
+    };
+};
+
+export default useInvoiceSummary;
