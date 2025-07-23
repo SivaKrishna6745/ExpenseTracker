@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     return (
-        <nav className="flex items-center justify-between px-6 py-4 bg-white/50 text-slate-900 shadow-md">
+        <nav className="flex items-center justify-between px-6 py-4 bg-black/80 dark:bg-white/80 text-slate-400 dark:text-slate-800 shadow-md">
             <div className="text-xl font-semibold">FinanceDash</div>
             <div className="flex gap-6 text-sm font-medium">
                 <Link to="/" className="text-md hover:text-blue-600">
