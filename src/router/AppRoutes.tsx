@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
-import Dashboard from '../components/Dashboard';
-import NotFound from '../components/NotFound';
+import NotFound from '../pages/NotFound';
+import Dashboard from '../pages/Dashboard';
 import Invoices from '../pages/Invoices';
 import Settings from '../pages/Settings';
 
