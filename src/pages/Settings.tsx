@@ -2,7 +2,6 @@ import useSettings from '../hooks/useSettings';
 
 const Settings = () => {
     const settings = useSettings();
-    console.log(settings.theme);
     return (
         <div className="p-6 flex flex-col gap-6 max-w-md items-center justify-center">
             <div className="flex items-center gap-4">
