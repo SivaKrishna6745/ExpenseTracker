@@ -1,3 +1,4 @@
+export type InvoiceStatus = '' | 'paid' | 'pending' | 'draft';
 export interface LineItem {
     id: string;
     description: string;
@@ -11,6 +12,6 @@ export interface Invoice {
     date: string;
     dueDate?: string;
     items: LineItem[];
-    status: 'draft' | 'paid' | 'pending';
+    status: InvoiceStatus;
     notes?: string;
 }
