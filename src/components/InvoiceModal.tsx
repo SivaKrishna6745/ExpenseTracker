@@ -1,14 +1,18 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { Invoice, InvoiceStatus, LineItem } from '../types/invoice';
-import { Plus, Trash2 } from 'lucide-react';
+import { CircleX, Plus, Trash2 } from 'lucide-react';
 import InvoiceModalInput from './InvoiceModalInput';
 import StatusSelect from './StatusSelect';
+import { useDispatch } from 'react-redux';
+import { updateInvoice } from '../features/invoices/invoiceSlice';
 
 type InvoiceModalProps = {
     open: boolean;
     onClose: () => void;
     invoice?: Invoice;
     onSubmit: (invoice: Invoice) => void;
+    isEdit?: boolean;
+    selectedInv?: Invoice;
 };
 
 const itemFields: { key: keyof LineItem; type: string; placeholder: string }[] = [
@@ -17,7 +21,8 @@ const itemFields: { key: keyof LineItem; type: string; placeholder: string }[] =
     { key: 'rate', type: 'number', placeholder: 'rate' },
 ];
 
-const InvoiceModal = ({ open, onClose, onSubmit }: InvoiceModalProps) => {
+const InvoiceModal = ({ open, onClose, onSubmit, isEdit, selectedInv }: InvoiceModalProps) => {
+    const dispatch = useDispatch();
     const [formData, setFormData] = useState<Invoice>({
         id: '',
         date: '',
@@ -25,6 +30,17 @@ const InvoiceModal = ({ open, onClose, onSubmit }: InvoiceModalProps) => {
         items: [],
         status: '',
     });
+    const handleClose = () => {
+        setFormData({
+            id: '',
+            date: '',
+            client: '',
+            items: [],
+            status: '',
+        });
+        onClose();
+    };
+
     const [item, setItem] = useState({
         id: '',
         description: '',
@@ -52,6 +68,18 @@ const InvoiceModal = ({ open, onClose, onSubmit }: InvoiceModalProps) => {
         });
     };
 
+    useEffect(() => {
+        if (isEdit && selectedInv) {
+            setFormData({
+                id: selectedInv?.id || '',
+                date: selectedInv?.date || '',
+                client: selectedInv?.client || '',
+                items: selectedInv?.items ? [...selectedInv?.items] : [],
+                status: selectedInv?.status || '',
+            });
+        }
+    }, [isEdit, selectedInv]);
+
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
     const [err, setErr] = useState({
         date: '',
@@ -77,24 +105,38 @@ const InvoiceModal = ({ open, onClose, onSubmit }: InvoiceModalProps) => {
             return;
         }
         setIsSubmitting(true);
+        const validateInvoice: Invoice = {
+            ...formData,
+            id: crypto.randomUUID(),
+        };
+        if (isEdit) {
+            dispatch(updateInvoice(formData));
+        } else {
+            onSubmit(validateInvoice);
+        }
         setTimeout(() => {
-            setErr({
-                date: '',
-                client: '',
-                items: '',
-                status: '',
-            });
-            onSubmit(formData);
             setIsSubmitting(false);
             onClose();
+            setFormData({
+                id: '',
+                date: '',
+                client: '',
+                items: [],
+                status: '',
+            });
         }, 1500);
+        setErr({
+            date: '',
+            client: '',
+            items: '',
+            status: '',
+        });
     };
 
     return (
         <>
             {open && (
                 <div className="fixed inset-0 bg-black/90 flex flex-col justify-center items-center z-50">
-                    <h2 className="text-2xl text-center text-white"> Add Invoice </h2>
                     <form
                         className="flex flex-col gap-12 text-white bg-black/60 p-8 rounded-lg"
                         onSubmit={(e) => {
@@ -102,6 +144,12 @@ const InvoiceModal = ({ open, onClose, onSubmit }: InvoiceModalProps) => {
                             handleSubmit();
                         }}
                     >
+                        <div className="relative flex justify-between items-center text-white dark:text-slate-800">
+                            <h2 className="text-2xl"> Add Invoice </h2>
+                            <button className="absolute top-0 right-0 cursor-pointer" onClick={handleClose}>
+                                <CircleX size={32} />
+                            </button>
+                        </div>
                         <div className="flex flex-col gap-4">
                             <InvoiceModalInput
                                 label="Date"

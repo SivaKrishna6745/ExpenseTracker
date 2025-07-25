@@ -4,6 +4,8 @@ import useAppSelector from '../hooks/useAppSelector';
 import type { Invoice } from '../types/invoice';
 import { useState } from 'react';
 import InvoiceModal from '../components/InvoiceModal';
+import { useDispatch } from 'react-redux';
+import { addInvoice, selectInvoice } from '../features/invoices/invoiceSlice';
 
 const statusColorMap: { [key: string]: string } = {
     paid: 'bg-green-400',
@@ -12,7 +14,9 @@ const statusColorMap: { [key: string]: string } = {
 };
 
 const Invoices = () => {
+    const dispatch = useDispatch();
     const invoices = useAppSelector((state) => state.invoices.invoices);
+    console.log('invoices', invoices);
     const selectedMonth = useAppSelector((state) => state.expenses.selectedMonth);
     const curreny = useAppSelector((state) => state.settings.settings.currency);
 
@@ -32,8 +36,17 @@ const Invoices = () => {
         invoiceCategory[inv.status].amount += invAmount;
     });
 
-    const [invoicesList, setInvoicesList] = useState<Invoice[]>([]);
     const [modalOpen, setModalOpen] = useState<boolean>(false);
+    const handleFormSubmit = (data: Invoice) => {
+        dispatch(addInvoice(data));
+        setModalOpen(false);
+    };
+
+    const [isEditMode, setIsEditMode] = useState<boolean>(false);
+    const selectedInvId = useAppSelector((state) => state.invoices.selectedInvoiceId);
+    const selectedInv = useAppSelector((state) =>
+        state.invoices.invoices.find((inv: Invoice) => inv.id === selectedInvId)
+    );
 
     return (
         <div className="flex flex-col m-4">
@@ -48,9 +61,15 @@ const Invoices = () => {
                 </button>
                 <InvoiceModal
                     open={modalOpen}
-                    onClose={() => setModalOpen(false)}
+                    onClose={() => {
+                        setModalOpen(false);
+                        if (isEditMode) setIsEditMode(false);
+                        dispatch(selectInvoice(null));
+                    }}
                     invoice={undefined}
-                    onSubmit={(data) => setModalOpen(false)}
+                    onSubmit={(data) => handleFormSubmit(data)}
+                    isEdit={isEditMode}
+                    selectedInv={selectedInv}
                 />
             </div>
             {filteredInvoices?.length ? (
@@ -73,6 +92,11 @@ const Invoices = () => {
                                         amount={inv.items.reduce((sum, item) => sum + item.rate * item.quantity, 0)}
                                         date={inv.date}
                                         icon={<ClipboardList size={20} className="text-gray-800" />}
+                                        onEdit={() => {
+                                            dispatch(selectInvoice(inv.id));
+                                            setIsEditMode(true);
+                                            setModalOpen(true);
+                                        }}
                                     />
                                 ))}
                                 <div className="flex justify-end mr-4 text-sm font-semibold tracking-wide uppercase px-3 py-2">
@@ -88,9 +112,7 @@ const Invoices = () => {
                     </div>
                 ))
             ) : (
-                <p className="text-center text-gray-600 py-4">
-                    No Invoices found for <strong>{selectedMonth}</strong>
-                </p>
+                <p className="text-center text-gray-600 py-4">No Invoices found</p>
             )}
         </div>
     );
