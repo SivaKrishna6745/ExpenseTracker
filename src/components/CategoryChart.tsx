@@ -6,7 +6,7 @@ type CategoryChartProps = {
 
 const CategoryChart = ({ chartData }: CategoryChartProps) => {
     return (
-        <ResponsiveContainer width="100%" height={500}>
+        <ResponsiveContainer width="100%" height={300}>
             <BarChart
                 data={chartData}
                 margin={{
