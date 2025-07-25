@@ -10,10 +10,15 @@ const MonthSelector = ({ selectedMonth, onChange, availableMonths }: MonthSelect
     const monthsList = availableMonths?.length ? availableMonths : allMonths;
     return (
         <>
-            <div className="flex flex-row gap-2">
+            <div className="flex justify-center items-center flex-row gap-2">
                 <label htmlFor="month-select">Select a Month:</label>
-                <select id="month-select" value={selectedMonth} onChange={(e) => onChange(e.target.value)}>
-                    <option value="" disabled>
+                <select
+                    id="month-select"
+                    value={selectedMonth}
+                    onChange={(e) => onChange(e.target.value)}
+                    className="bg-amber-700 dark:bg-amber-300 outline-0 p-2 rounded-lg"
+                >
+                    <option value="" disabled className="text-slate-800 opacity-50">
                         please choose a month
                     </option>
                     {monthsList.map((month) => (
