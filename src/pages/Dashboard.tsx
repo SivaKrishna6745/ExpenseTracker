@@ -1,4 +1,4 @@
-import useAppDispatch from '../hooks/useAppDispatch';
+// import useAppDispatch from '../hooks/useAppDispatch';
 import useFilteredExpenses from '../hooks/useFilteredExpenses';
 import useInvoiceSummary from '../hooks/useInvoiceSummary';
 import useSettings from '../hooks/useSettings';
@@ -6,13 +6,11 @@ import SummaryCard from '../components/SummaryCard';
 import { FileText, Wallet, CheckCircle, AlertCircle } from 'lucide-react';
 import CategoryChart from '../components/CategoryChart';
 import type { Expense } from '../types/expense';
-import MonthSelector from '../components/MonthSelector';
-import { useState } from 'react';
 
 const Dashboard = () => {
-    const dispatch = useAppDispatch();
-    const { totalAmount, invoicesCount, paidCount, dueCount } = useInvoiceSummary();
-    const { theme, currency } = useSettings();
+    // const dispatch = useAppDispatch();
+    const { totalAmount, paidCount, dueCount } = useInvoiceSummary();
+    const { currency } = useSettings();
     const { filteredExpenses } = useFilteredExpenses();
 
     const catergoryTotals: { [key: string]: number } = {};
@@ -28,11 +26,6 @@ const Dashboard = () => {
         category,
         amount,
     }));
-
-    const [selectedMonth, setSelectedMonth] = useState<string>('');
-    const handleSelectedMonth = (month: string) => {
-        setSelectedMonth(month);
-    };
 
     return (
         <div className="mx-4 my-2">
@@ -68,9 +61,6 @@ const Dashboard = () => {
             </div>
             <div className="mb-4">
                 <CategoryChart chartData={chartData} />
-            </div>
-            <div className="mb-4">
-                <MonthSelector selectedMonth={selectedMonth} onChange={handleSelectedMonth} />
             </div>
         </div>
     );
