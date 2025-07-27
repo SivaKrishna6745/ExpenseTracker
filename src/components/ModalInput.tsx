@@ -1,13 +1,14 @@
-type InvoiceModalInputProps = {
+type ModalInputProps = {
     label?: string;
     type: string;
     id?: string;
     placeholder: string;
     value: string | number;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    className?: string;
 };
 
-const InvoiceModalInput = ({ label, type, id, placeholder, value, onChange }: InvoiceModalInputProps) => {
+const ModalInput = ({ label, type, id, placeholder, value, onChange, className }: ModalInputProps) => {
     return (
         <>
             {label && <label htmlFor={id}>{label}</label>}
@@ -17,10 +18,10 @@ const InvoiceModalInput = ({ label, type, id, placeholder, value, onChange }: In
                 placeholder={placeholder}
                 value={value}
                 onChange={(e) => onChange(e)}
-                className="border-b-2 border-cyan-300 py-2 outline-0"
+                className={`border-b-2 border-cyan-300 py-2 outline-0 ${className}`}
             />
         </>
     );
 };
 
-export default InvoiceModalInput;
+export default ModalInput;
