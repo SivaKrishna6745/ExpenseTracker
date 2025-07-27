@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import type { Invoice, InvoiceStatus, LineItem } from '../types/invoice';
 import { CircleX, Plus, Trash2 } from 'lucide-react';
-import InvoiceModalInput from './InvoiceModalInput';
-import StatusSelect from './StatusSelect';
+import ModalInput from './ModalInput';
 import { useDispatch } from 'react-redux';
 import { updateInvoice } from '../features/invoices/invoiceSlice';
+import CustomSelect from './CustomSelect';
 
 type InvoiceModalProps = {
     open: boolean;
@@ -151,9 +151,9 @@ const InvoiceModal = ({ open, onClose, onSubmit, isEdit, selectedInv }: InvoiceM
                             </button>
                         </div>
                         <div className="flex flex-col gap-4">
-                            <InvoiceModalInput
+                            <ModalInput
                                 label="Date"
-                                type="text"
+                                type="date"
                                 id="date"
                                 placeholder="2025-07-23"
                                 value={formData.date}
@@ -169,7 +169,7 @@ const InvoiceModal = ({ open, onClose, onSubmit, isEdit, selectedInv }: InvoiceM
                             )}
                         </div>
                         <div className="flex flex-col gap-4">
-                            <InvoiceModalInput
+                            <ModalInput
                                 label="Client"
                                 type="text"
                                 id="client"
@@ -192,7 +192,7 @@ const InvoiceModal = ({ open, onClose, onSubmit, isEdit, selectedInv }: InvoiceM
                                 <div className="flex gap-4">
                                     {itemFields.map(({ key, type, placeholder }) => {
                                         return (
-                                            <InvoiceModalInput
+                                            <ModalInput
                                                 key={key}
                                                 type={type}
                                                 placeholder={placeholder}
@@ -245,7 +245,7 @@ const InvoiceModal = ({ open, onClose, onSubmit, isEdit, selectedInv }: InvoiceM
                             })}
                         </div>
                         <div className="flex flex-col gap-4">
-                            <StatusSelect
+                            <CustomSelect
                                 label="Status"
                                 id="status"
                                 value={formData.status}
@@ -256,6 +256,11 @@ const InvoiceModal = ({ open, onClose, onSubmit, isEdit, selectedInv }: InvoiceM
                                     });
                                     setErr({ ...err, status: '' });
                                 }}
+                                options={[
+                                    { value: 'paid', label: 'Paid' },
+                                    { value: 'pending', label: 'Pending' },
+                                    { value: 'draft', label: 'Draft' },
+                                ]}
                             />
                         </div>
                         {err.status && (
