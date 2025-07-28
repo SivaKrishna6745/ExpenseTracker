@@ -3,11 +3,13 @@ import type { Expense } from '../../types/expense';
 
 interface ExpenseState {
     expenses: Expense[];
+    selectedExpenseId: string | null;
     selectedMonth: string;
 }
 
 const initialState: ExpenseState = {
     expenses: [],
+    selectedExpenseId: null,
     selectedMonth: '',
 };
 
@@ -23,7 +25,10 @@ const expenseSlice = createSlice({
             if (idx !== -1) state.expenses[idx] = action.payload;
         },
         removeExpense: (state: ExpenseState, action: PayloadAction<string>) => {
-            state.expenses.filter((exp: Expense) => exp.id !== action.payload);
+            state.expenses = state.expenses.filter((exp: Expense) => exp.id !== action.payload);
+        },
+        selectExpense: (state: ExpenseState, action: PayloadAction<string>) => {
+            state.selectedExpenseId = action.payload;
         },
         setSelectedMonth: (state: ExpenseState, action: PayloadAction<string | ''>) => {
             state.selectedMonth = action.payload;
@@ -31,5 +36,5 @@ const expenseSlice = createSlice({
     },
 });
 
-export const { addExpense, updateExpense, removeExpense, setSelectedMonth } = expenseSlice.actions;
+export const { addExpense, updateExpense, removeExpense, selectExpense, setSelectedMonth } = expenseSlice.actions;
 export default expenseSlice.reducer;

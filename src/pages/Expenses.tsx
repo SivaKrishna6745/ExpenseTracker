@@ -6,7 +6,7 @@ import type { Expense } from '../types/expense';
 import { Plus } from 'lucide-react';
 import ExpenseModal from '../components/ExpenseModal';
 import { useDispatch } from 'react-redux';
-import { addExpense } from '../features/expenses/expenseSlice';
+import { addExpense, selectExpense } from '../features/expenses/expenseSlice';
 
 const expEmoji: { [key: string]: string } = {
     Travel: '🚌',
@@ -53,6 +53,7 @@ const Expenses = () => {
                             category={exp.category}
                             emoji={expEmoji[exp.category]}
                             onEdit={() => {
+                                dispatch(selectExpense(exp.id));
                                 setIsEditMode(true);
                                 setIsExpenseModalOpen(true);
                             }}
