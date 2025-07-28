@@ -5,6 +5,8 @@ import useAppSelector from '../hooks/useAppSelector';
 import type { Expense } from '../types/expense';
 import { Plus } from 'lucide-react';
 import ExpenseModal from '../components/ExpenseModal';
+import { useDispatch } from 'react-redux';
+import { addExpense } from '../features/expenses/expenseSlice';
 
 const expEmoji: { [key: string]: string } = {
     Travel: '🚌',
@@ -13,6 +15,7 @@ const expEmoji: { [key: string]: string } = {
 };
 
 const Expenses = () => {
+    const dispatch = useDispatch();
     const expenses = useAppSelector((state) => state.expenses.expenses);
     // const selectedMonth = useAppSelector((state) => state.expenses.selectedMonth);
     console.log(expenses);
@@ -22,8 +25,13 @@ const Expenses = () => {
     };
 
     const [isExpenseModalOpen, setIsExpenseModalOpen] = useState<boolean>(false);
-    const handleAddExpense = () => {
-        setIsExpenseModalOpen(true);
+    const [isEditMode, setIsEditMode] = useState<boolean>(false);
+    const selectedExpId = useAppSelector((state) => state.expenses.selectedExpenseId);
+    const selectedExp = useAppSelector((state) =>
+        state.expenses.expenses.find((exp: Expense) => exp.id === selectedExpId)
+    );
+    const handleFormSubmit = (data: Expense) => {
+        dispatch(addExpense(data));
     };
 
     return (
@@ -38,16 +46,24 @@ const Expenses = () => {
                     return (
                         <ExpenseCard
                             key={exp.id}
+                            id={exp.id}
                             title={exp.title}
                             amount={exp.amount}
                             date={exp.date}
                             category={exp.category}
                             emoji={expEmoji[exp.category]}
+                            onEdit={() => {
+                                setIsEditMode(true);
+                                setIsExpenseModalOpen(true);
+                            }}
                         />
                     );
                 })
             )}
-            <div className="fixed bottom-6 right-6 z-50 flex flex-col items-center gap-2" onClick={handleAddExpense}>
+            <div
+                className="fixed bottom-6 right-6 z-50 flex flex-col items-center gap-2"
+                onClick={() => setIsExpenseModalOpen(true)}
+            >
                 <button
                     type="button"
                     id="add-expense"
@@ -61,9 +77,12 @@ const Expenses = () => {
             </div>
             <ExpenseModal
                 isOpen={isExpenseModalOpen}
+                onSubmit={(data) => handleFormSubmit(data)}
                 onClose={() => {
                     setIsExpenseModalOpen(false);
                 }}
+                isEdit={isEditMode}
+                selectedExp={selectedExp}
             />
         </div>
     );
