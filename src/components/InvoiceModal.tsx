@@ -12,7 +12,7 @@ type InvoiceModalProps = {
     invoice?: Invoice;
     onSubmit: (invoice: Invoice) => void;
     isEdit?: boolean;
-    selectedInv?: Invoice;
+    selectedInv: Invoice | undefined;
 };
 
 const itemFields: { key: keyof LineItem; type: string; placeholder: string }[] = [

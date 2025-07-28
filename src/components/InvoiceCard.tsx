@@ -1,8 +1,7 @@
 import { FilePenLine, FileX2 } from 'lucide-react';
 import type { ReactNode } from 'react';
-import useAppSelector from '../hooks/useAppSelector';
 import { useDispatch } from 'react-redux';
-import { removeInvoice, updateInvoice } from '../features/invoices/invoiceSlice';
+import { removeInvoice } from '../features/invoices/invoiceSlice';
 
 type InvoiceCardProps = {
     id: string;
@@ -11,12 +10,6 @@ type InvoiceCardProps = {
     currency?: string;
     icon?: ReactNode;
     onEdit: () => void;
-};
-
-const statusColorMap = {
-    paid: 'bg-green-500',
-    pending: 'bg-red-500',
-    draft: 'bg-gray-500',
 };
 
 const InvoiceCard = ({ id, amount, date, currency, icon, onEdit }: InvoiceCardProps) => {
