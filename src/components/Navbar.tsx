@@ -27,7 +27,7 @@ const Navbar = () => {
                 </Link>
             </div>
             <button
-                className={`relative inline-flex items-center h-7 w-14 rounded-full transition-colors duration-300 ${
+                className={`cursor-pointer relative inline-flex items-center h-7 w-14 rounded-full transition-colors duration-300 ${
                     isDark ? 'bg-gray-500' : 'bg-neutral-600'
                 }`}
                 aria-label="toggle theme"
