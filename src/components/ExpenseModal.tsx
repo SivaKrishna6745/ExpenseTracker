@@ -45,6 +45,13 @@ const ExpenseModal = ({ isOpen, onClose, expense, onSubmit, isEdit, selectedExp 
             });
         }
     }, [isEdit, selectedExp]);
+    const validateDate = (ExpDate: string) => {
+        const date = new Date(ExpDate);
+        const now = new Date();
+        const earliest = new Date('2010-01-01');
+        return date >= earliest && date <= now;
+    };
+
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
     const [err, setErr] = useState({
         title: '',
@@ -69,7 +76,7 @@ const ExpenseModal = ({ isOpen, onClose, expense, onSubmit, isEdit, selectedExp 
             setErr({ ...err, category: 'Please select either food or travel or software' });
             return;
         }
-        if (!expFormData.date) {
+        if (!expFormData.date || !validateDate(expFormData.date)) {
             setErr({ ...err, date: 'Please enter a valid date' });
             return;
         }
