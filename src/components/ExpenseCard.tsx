@@ -11,10 +11,11 @@ type ExpenseCardProps = {
     date: string;
     category: ExpenseCategory;
     emoji?: string;
-    onEdit: () => void;
+    onEdit?: () => void;
+    dashboard?: boolean;
 };
 
-const ExpenseCard = ({ id, title, amount, date, category, emoji, onEdit }: ExpenseCardProps) => {
+const ExpenseCard = ({ id, title, amount, date, category, emoji, onEdit, dashboard }: ExpenseCardProps) => {
     const dispatch = useDispatch();
     const currency = useAppSelector((state) => state.settings.settings.currency);
     const deleteExpense = (id: string) => {
@@ -23,31 +24,37 @@ const ExpenseCard = ({ id, title, amount, date, category, emoji, onEdit }: Expen
 
     return (
         <>
-            <div className="flex justify-between items-center text-lg gap-2 bg-red-300 rounded-lg p-3 my-3 mx-2">
-                <span>{title}</span>
-                <span aria-label="amount">
+            <div className="flex justify-between items-center text-lg bg-red-300 rounded-lg p-3 my-3">
+                <span className="w-60">{title}</span>
+                <span className="w-60" aria-label="amount">
                     {currency ?? '₹'} {amount}
                 </span>
-                <span aria-label="date">{date}</span>
-                <span>
+                <span className="w-60" aria-label="date">
+                    {date}
+                </span>
+                <span className="w-60">
                     {emoji} {category}
                 </span>
-                <div className="flex gap-2">
-                    <button
-                        className="bg-blue-600 text-slate-300 p-2 rounded-lg flex gap-2 cursor-pointer"
-                        onClick={onEdit}
-                    >
-                        <FilePenLine />
-                        Edit Expense
-                    </button>
-                    <button
-                        className="bg-red-600 text-slate-300 p-2 rounded-lg flex gap-2 cursor-pointer"
-                        onClick={() => deleteExpense(id)}
-                    >
-                        <FileX2 />
-                        Delete Expense
-                    </button>
-                </div>
+                {dashboard ? (
+                    ''
+                ) : (
+                    <div className="flex gap-2">
+                        <button
+                            className="bg-blue-600 text-slate-300 p-2 rounded-lg flex gap-2 cursor-pointer"
+                            onClick={onEdit}
+                        >
+                            <FilePenLine />
+                            Edit Expense
+                        </button>
+                        <button
+                            className="bg-red-600 text-slate-300 p-2 rounded-lg flex gap-2 cursor-pointer"
+                            onClick={() => deleteExpense(id)}
+                        >
+                            <FileX2 />
+                            Delete Expense
+                        </button>
+                    </div>
+                )}
             </div>
         </>
     );

@@ -28,7 +28,11 @@ const CustomSelect = ({ label, id, value, onChange, options }: CustomSelectProps
                     Select the {label === 'Status' ? 'status' : 'category'}
                 </option>
                 {options.map((eachOption) => {
-                    return <option value={eachOption.value}>{eachOption.label}</option>;
+                    return (
+                        <option key={eachOption.value} value={eachOption.value}>
+                            {eachOption.label}
+                        </option>
+                    );
                 })}
             </select>
         </>

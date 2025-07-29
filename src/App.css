@@ -1,0 +1,49 @@
+@import './index.css';
+
+.inv-total,
+.inv-no,
+.exp-total,
+.exp-no {
+    color: var(--card-text-color);
+    background-color: var(--primary-card-color);
+    border: 1px solid var(--card-border-color);
+}
+
+.dark .inv-total,
+.dark .inv-no,
+.dark .exp-total,
+.dark .exp-no {
+    color: var(--card-text-color);
+    background-color: var(--primary-card-color);
+    border: 1px solid var(--card-border-color);
+}
+
+/* .inv-no {
+    color: #495f4a;
+    background-color: #b8d6b8;
+}
+.exp-total {
+    color: #3a4a3b;
+    background-color: #82b482;
+}
+.exp-no {
+    color: #495f4a;
+    background-color: #b8d6b8;
+} */
+
+/* .dark .inv-total {
+    color: #e0efe0;
+    background-color: #528070;
+}
+.dark .inv-no {
+    color: #b3c9b3;
+    background-color: #517b4f;
+}
+.dark .exp-total {
+    color: #e0efe0;
+    background-color: #3a6856;
+}
+.dark .exp-no {
+    color: #b3c9b3;
+    background-color: #517b4f;
+} */

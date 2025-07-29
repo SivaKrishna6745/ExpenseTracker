@@ -9,10 +9,11 @@ type InvoiceCardProps = {
     date: string;
     currency?: string;
     icon?: ReactNode;
-    onEdit: () => void;
+    onEdit?: () => void;
+    dashboard?: boolean;
 };
 
-const InvoiceCard = ({ id, amount, date, currency, icon, onEdit }: InvoiceCardProps) => {
+const InvoiceCard = ({ id, amount, date, currency, icon, onEdit, dashboard }: InvoiceCardProps) => {
     const dispatch = useDispatch();
     const deleteInvoice = (id: string) => {
         dispatch(removeInvoice(id));
@@ -33,22 +34,26 @@ const InvoiceCard = ({ id, amount, date, currency, icon, onEdit }: InvoiceCardPr
                         {amount.toLocaleString()}
                     </span>
                 </div>
-                <div className="flex gap-2">
-                    <button
-                        className="bg-blue-600 text-slate-300 p-2 rounded-lg flex gap-2 cursor-pointer"
-                        onClick={onEdit}
-                    >
-                        <FilePenLine />
-                        Edit Invoice
-                    </button>
-                    <button
-                        className="bg-red-600 text-slate-300 p-2 rounded-lg flex gap-2 cursor-pointer"
-                        onClick={() => deleteInvoice(id)}
-                    >
-                        <FileX2 />
-                        Delete Invoice
-                    </button>
-                </div>
+                {dashboard ? (
+                    ''
+                ) : (
+                    <div className="flex gap-2">
+                        <button
+                            className="bg-blue-600 text-slate-300 p-2 rounded-lg flex gap-2 cursor-pointer"
+                            onClick={onEdit}
+                        >
+                            <FilePenLine />
+                            Edit Invoice
+                        </button>
+                        <button
+                            className="bg-red-600 text-slate-300 p-2 rounded-lg flex gap-2 cursor-pointer"
+                            onClick={() => deleteInvoice(id)}
+                        >
+                            <FileX2 />
+                            Delete Invoice
+                        </button>
+                    </div>
+                )}
             </div>
             <hr className="border-gray-300 dark:border-gray-700" />
         </>

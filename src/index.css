@@ -8,15 +8,25 @@
     font-weight: 400;
 
     /* color-scheme: light dark; */
-    background-color: #f4f4f4;
+    background-color: #fbfbfb;
 
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+
+    --primary-card-color: #e0f2f7;
+    --card-accent-color: #b2ebf2;
+    --card-text-color: #00796b;
+    --card-border-color: #4dd0e1;
 }
 
-.dark {
-    background-color: #2e2e2e;
+.dark:root {
+    background-color: #0f1e2a;
     color: rgba(255, 255, 255, 0.87);
+
+    --primary-card-color: #1a3245;
+    --card-accent-color: #2b4a61;
+    --card-text-color: #80deea;
+    --card-border-color: #4dd0e1;
 }
