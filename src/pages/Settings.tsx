@@ -12,7 +12,7 @@ const Settings = () => {
                     id="theme-select"
                     value={settings.theme}
                     onChange={(e) => settings.setTheme(e.target.value as 'light' | 'dark')}
-                    className="bg-gray-700 text-white dark:bg-gray-500 dark:text-slate-800 px-4 py-2 rounded-md"
+                    className="bg-gray-300 text-gray-900 dark:bg-gray-800 dark:text-gray-200 px-4 py-2 rounded-md"
                 >
                     <option value="light">Light</option>
                     <option value="dark">Dark</option>
@@ -26,7 +26,7 @@ const Settings = () => {
                     id="currency-select"
                     value={settings.currency}
                     onChange={(e) => settings.setCurrency(e.target.value as 'INR' | 'USD' | 'EUR')}
-                    className="bg-gray-700 text-white dark:bg-gray-500 dark:text-slate-800 px-4 py-2 rounded-md"
+                    className="bg-gray-300 text-gray-900 dark:bg-gray-800 dark:text-gray-200 px-4 py-2 rounded-md"
                 >
                     <option value="INR">INR</option>
                     <option value="USD">USD</option>
