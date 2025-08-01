@@ -1,7 +1,7 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import type { Expense } from '../../types/expense';
 
-interface ExpenseState {
+export interface ExpenseState {
     expenses: Expense[];
     selectedExpenseId: string | null;
     selectedMonth: string;
@@ -14,7 +14,7 @@ const initialState: ExpenseState = {
 };
 
 const expenseSlice = createSlice({
-    name: 'expense',
+    name: 'expenses',
     initialState,
     reducers: {
         addExpense: (state: ExpenseState, action: PayloadAction<Expense>) => {
