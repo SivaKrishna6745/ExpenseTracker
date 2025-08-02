@@ -25,14 +25,12 @@ const ExpenseCard = ({ id, title, amount, date, category, emoji, onEdit, dashboa
     return (
         <>
             <div className="flex justify-between items-center text-lg bg-red-300 rounded-lg p-3 my-3">
-                <span className="w-60">{title}</span>
-                <span className="w-60" aria-label="amount">
+                <span>{title}</span>
+                <span aria-label="amount">
                     {currency ?? '₹'} {amount}
                 </span>
-                <span className="w-60" aria-label="date">
-                    {date}
-                </span>
-                <span className="w-60">
+                <span aria-label="date">{date}</span>
+                <span>
                     {emoji} {category}
                 </span>
                 {dashboard ? (
