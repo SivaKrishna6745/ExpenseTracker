@@ -11,7 +11,7 @@ const Settings = () => {
                 <select
                     id="currency-select"
                     value={settings.currency}
-                    onChange={(e) => settings.setCurrency(e.target.value as 'INR' | 'USD' | 'EUR')}
+                    onChange={(e) => settings.setCurrency(e.target.value as '₹' | '$' | '€')}
                     className="bg-gray-300 text-gray-900 dark:bg-gray-800 dark:text-gray-200 px-4 py-2 rounded-md"
                 >
                     <option value="INR">INR</option>

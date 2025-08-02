@@ -1,5 +1,5 @@
 export interface Settings {
     theme: 'light' | 'dark';
-    currency: 'INR' | 'USD' | 'EUR';
+    currency: '₹' | '$' | '€';
     autoExport: boolean;
 }

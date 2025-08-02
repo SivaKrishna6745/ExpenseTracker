@@ -16,7 +16,7 @@ const SummaryCard = ({ title, amount, currency, icon, className }: SummaryCardPr
                 <strong>{title}</strong>
             </div>
             <div className="font-semibold text-2xl">
-                <span>{currency ?? '₹'} </span>
+                <span>{currency} </span>
                 <span aria-label="amount">{amount.toLocaleString()}</span>
             </div>
         </div>

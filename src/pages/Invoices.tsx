@@ -53,7 +53,7 @@ const Invoices = () => {
             <div className="flex items-center justify-between cursor-pointer">
                 <h2 className="text-2xl">Invoices</h2>
                 <button
-                    className="bg-green-600 text-slate-200 p-2 rounded-lg cursor-pointer text-md font-semibold flex gap-2 justify-center items-center"
+                    className="bg-green-600 text-slate-200 px-3 py-2 rounded-lg cursor-pointer text-md font-semibold flex gap-2 justify-center items-center"
                     onClick={() => setModalOpen(true)}
                 >
                     <FilePlus2 />
@@ -75,7 +75,7 @@ const Invoices = () => {
             {filteredInvoices?.length ? (
                 Object.entries(invoiceCategory).map(([status, invoices], idx) => (
                     <div key={idx} className="my-4 flex flex-col gap-2">
-                        <div className="px-2 py-1 rounded-full bg-red-200 text-red-700 text-xs w-max">
+                        <div className="px-3 py-1 rounded-full bg-red-200 text-red-800 text-sm font-semibold w-max">
                             {status
                                 .toLowerCase()
                                 .split(' ')
@@ -97,6 +97,7 @@ const Invoices = () => {
                                             setIsEditMode(true);
                                             setModalOpen(true);
                                         }}
+                                        currency={curreny}
                                     />
                                 ))}
                                 <div className="flex justify-end mr-4 text-sm font-semibold tracking-wide uppercase px-3 py-2">
@@ -105,7 +106,7 @@ const Invoices = () => {
                                         .split(' ')
                                         .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
                                         .join(' ')}{' '}
-                                    Total: {curreny ?? '₹'} {invoices.amount}
+                                    Total: {curreny} {invoices.amount}
                                 </div>
                             </>
                         </div>

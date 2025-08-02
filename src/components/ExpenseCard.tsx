@@ -27,7 +27,7 @@ const ExpenseCard = ({ id, title, amount, date, category, emoji, onEdit, dashboa
             <div className="flex justify-between items-center text-lg bg-rose-400 text-black dark:text-white rounded-lg p-3 my-3">
                 <span>{title}</span>
                 <span aria-label="amount">
-                    {currency ?? '₹'} {amount}
+                    {currency} {amount}
                 </span>
                 <span aria-label="date">{date}</span>
                 <span>

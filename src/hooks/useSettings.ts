@@ -10,7 +10,7 @@ export const useSettings = () => {
         currency,
         autoExport,
         setTheme: (value: 'light' | 'dark') => dispatch(toggleTheme(value)),
-        setCurrency: (value: 'INR' | 'USD' | 'EUR') => dispatch(setCurrency(value)),
+        setCurrency: (value: '₹' | '$' | '€') => dispatch(setCurrency(value)),
     };
 };
 

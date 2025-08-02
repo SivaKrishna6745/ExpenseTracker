@@ -7,8 +7,8 @@ interface SettingsState {
 
 const initialState: SettingsState = {
     settings: {
-        theme: 'light',
-        currency: 'INR',
+        theme: 'dark',
+        currency: '₹',
         autoExport: false,
     },
 };
@@ -20,7 +20,7 @@ const settingsSlice = createSlice({
         toggleTheme: (state: SettingsState, action: PayloadAction<'light' | 'dark'>) => {
             state.settings.theme = action.payload;
         },
-        setCurrency: (state: SettingsState, action: PayloadAction<'INR' | 'USD' | 'EUR'>) => {
+        setCurrency: (state: SettingsState, action: PayloadAction<'₹' | '$' | '€'>) => {
             state.settings.currency = action.payload;
         },
         toggleAutoExport: (state: SettingsState) => {

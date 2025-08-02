@@ -30,8 +30,7 @@ const InvoiceCard = ({ id, amount, date, currency, icon, onEdit, dashboard }: In
                 </div>
                 <div>
                     <span aria-label="amount">
-                        {currency ?? '₹'}
-                        {amount.toLocaleString()}
+                        {currency} {amount.toLocaleString()}
                     </span>
                 </div>
                 {dashboard ? (
