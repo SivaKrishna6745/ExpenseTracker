@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 
 const useInvoiceSummary = () => {
     const invoices = useAppSelector((state) => state.invoices.invoices);
-    const totalAmount = invoices.reduce((acc, inv: Invoice) => {
+    const totalAmount = invoices.reduce((acc: number, inv: Invoice) => {
         const invoiceTotal = inv.items.reduce((sum, item) => sum + item.rate * item.quantity, 0);
         return acc + invoiceTotal;
     }, 0);

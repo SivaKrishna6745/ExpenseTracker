@@ -3,7 +3,7 @@ import useAppSelector from './useAppSelector';
 
 const useExpenseSummary = () => {
     const expenses = useAppSelector((state) => state.expenses.expenses);
-    const totalExpenseAmount = expenses.reduce((acc, exp: Expense) => {
+    const totalExpenseAmount = expenses.reduce((acc: number, exp: Expense) => {
         return acc + exp.amount;
     }, 0);
     const recentExpenses = expenses.slice(0, 2);

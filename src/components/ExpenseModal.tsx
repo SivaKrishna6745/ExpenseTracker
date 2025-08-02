@@ -15,7 +15,7 @@ type ExpenseModalProps = {
     selectedExp: Expense | undefined;
 };
 
-const ExpenseModal = ({ isOpen, onClose, expense, onSubmit, isEdit, selectedExp }: ExpenseModalProps) => {
+const ExpenseModal = ({ isOpen, onClose, onSubmit, isEdit, selectedExp }: ExpenseModalProps) => {
     const dispatch = useDispatch();
     const [expFormData, setExpFormData] = useState<Expense>({
         id: '',
