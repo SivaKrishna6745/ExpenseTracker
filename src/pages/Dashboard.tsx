@@ -120,9 +120,11 @@ const Dashboard = () => {
                         />
                     </div>
                 ))}
-                <div className="flex justify-center items-center">
-                    <CategoryChart chartData={chartData} entry="expense" />
-                </div>
+                {recentExpenses.length > 0 && (
+                    <div className="flex justify-center items-center">
+                        <CategoryChart chartData={chartData} entry="expense" />
+                    </div>
+                )}
             </div>
             <div className="mb-4 flex flex-col gap-4">
                 {recentInvoices.length > 0 ? (
@@ -144,9 +146,11 @@ const Dashboard = () => {
                         />
                     </div>
                 ))}
-                <div className="flex justify-center items-center">
-                    <CategoryChart chartData={invoiceChartData} entry="invoice" />
-                </div>
+                {recentInvoices.length > 0 && (
+                    <div className="flex justify-center items-center">
+                        <CategoryChart chartData={invoiceChartData} entry="invoice" />
+                    </div>
+                )}
             </div>
         </div>
     );
