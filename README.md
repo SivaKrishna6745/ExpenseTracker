@@ -1,69 +1,41 @@
-# React + TypeScript + Vite
+# Expense Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A minimalist dashboard to manage your expenses and invoices — styled for clarity, built for control.
+Lightweight. Theme-aware. Visually expressive.
 
-Currently, two official plugins are available:
+## 🧩 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+-   Add / Edit / Remove expenses & invoices
+-   Month-based filtering logic
+-   Paid / Pending / Draft invoice categorization
+-   Dashboard with recent data + graphs
+-   Currency switcher: ₹ / $ / €
+-   Light & dark mode toggle
 
-## Expanding the ESLint configuration
+## 🛠️ TechStack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+-   React + TypeScript
+-   Tailwind CSS
+-   Redux Toolkit
+-   Custom hooks
+-   Lucide-React icons
+-   Recharts
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Pre-requisites:
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+-   [Node.js](https://nodejs.org) (latest stable version)
+-   [Git](https://git-scm.com/downloads)
+-   [VS code](https://code.visualstudio.com/download) or your favorite editor
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 📦 Setup
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+-   git clone https://github.com/SivaKrishna6745/ExpenseTracker.git
+-   cd ExpenseTracker
+-   npm install
+-   npm run dev
+-   Open your browser and visit:
+    http://localhost:5173
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## HomePage
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+![Home Page - Dashboard View](homepage.png)
