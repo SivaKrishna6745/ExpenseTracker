@@ -91,7 +91,7 @@ const Invoices = () => {
                                         id={inv.id}
                                         amount={inv.items.reduce((sum, item) => sum + item.rate * item.quantity, 0)}
                                         date={inv.date}
-                                        icon={<ClipboardList size={20} className="text-gray-800" />}
+                                        icon={<ClipboardList size={20} className="text-gray-800 dark:text-gray-100" />}
                                         onEdit={() => {
                                             dispatch(selectInvoice(inv.id));
                                             setIsEditMode(true);

@@ -2,7 +2,7 @@ import useFilteredExpenses from '../hooks/useFilteredExpenses';
 import useInvoiceSummary from '../hooks/useInvoiceSummary';
 import useSettings from '../hooks/useSettings';
 import SummaryCard from '../components/SummaryCard';
-import { FileText, Currency } from 'lucide-react';
+import { FileText, Currency, ClipboardList } from 'lucide-react';
 import CategoryChart from '../components/CategoryChart';
 import type { Expense, ExpenseCategory } from '../types/expense';
 import useExpenseSummary from '../hooks/useExpenseSummary';
@@ -100,37 +100,52 @@ const Dashboard = () => {
                     />
                 </div>
             </div>
-            <div className="grid grid-flow-col grid-cols-2 gap-4">
-                <div className="mb-4 flex flex-col gap-4">
-                    {recentExpenses.length > 0 ? <h2 className="text-xl mb-4 font-semibold">Recent Expenses</h2> : ''}
-                    {recentExpenses.map((exp: Expense) => (
-                        <div className="-my-3">
-                            <ExpenseCard
-                                key={exp.id}
-                                id={exp.id}
-                                title={exp.title}
-                                amount={exp.amount}
-                                date={exp.date}
-                                category={exp.category}
-                                dashboard
-                            />
-                        </div>
-                    ))}
+            <div className="mb-4 flex flex-col gap-4">
+                {recentExpenses.length > 0 ? (
+                    <h2 className="text-md mb-3 font-semibold bg-slate-700 dark:bg-slate-200 text-white dark:text-black rounded-full px-3 py-1 w-max border-2 border-teal-700 shadow-md">
+                        Recent Expenses
+                    </h2>
+                ) : (
+                    ''
+                )}
+                {recentExpenses.map((exp: Expense) => (
+                    <div className="-my-3">
+                        <ExpenseCard
+                            key={exp.id}
+                            id={exp.id}
+                            title={exp.title}
+                            amount={exp.amount}
+                            date={exp.date}
+                            category={exp.category}
+                            dashboard
+                        />
+                    </div>
+                ))}
+                <div className="flex justify-center items-center">
                     <CategoryChart chartData={chartData} />
                 </div>
-                <div className="mb-4 flex flex-col gap-4">
-                    {recentInvoices.length > 0 ? <h2 className="text-xl mb-4 font-semibold">Recent Invoices</h2> : ''}
-                    {recentInvoices.map((inv: Invoice) => (
-                        <div key={inv.id} className="bg-blue-500 rounded-lg">
-                            <InvoiceCard
-                                id={inv.id}
-                                amount={inv.items.reduce((acc, item) => acc + item.quantity * item.rate, 0)}
-                                date={inv.date}
-                                currency={currency}
-                                dashboard
-                            />
-                        </div>
-                    ))}
+            </div>
+            <div className="mb-4 flex flex-col gap-4">
+                {recentInvoices.length > 0 ? (
+                    <h2 className="text-md mb-3 font-semibold bg-slate-700 dark:bg-slate-200 text-white dark:text-black rounded-full px-3 py-1 w-max border-2 border-teal-700 shadow-md">
+                        Recent Invoices
+                    </h2>
+                ) : (
+                    ''
+                )}
+                {recentInvoices.map((inv: Invoice) => (
+                    <div key={inv.id} className="bg-blue-400 rounded-lg">
+                        <InvoiceCard
+                            id={inv.id}
+                            amount={inv.items.reduce((acc, item) => acc + item.quantity * item.rate, 0)}
+                            date={inv.date}
+                            currency={currency}
+                            icon={<ClipboardList size={20} className="text-gray-800 dark:text-gray-100" />}
+                            dashboard
+                        />
+                    </div>
+                ))}
+                <div className="flex justify-center items-center">
                     <CategoryChart chartData={invoiceChartData} />
                 </div>
             </div>

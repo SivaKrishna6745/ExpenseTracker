@@ -1,12 +1,15 @@
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
 import CustomTooltip from './CustomTooltip';
 import CustomBar from './CustomBar';
+import useSettings from '../hooks/useSettings';
 
 type CategoryChartProps = {
     chartData: { category: string; amount: number; fillColor: string }[];
 };
 
 const CategoryChart = ({ chartData }: CategoryChartProps) => {
+    const { theme } = useSettings();
+
     return (
         <ResponsiveContainer width="75%" height={400}>
             <BarChart
@@ -34,15 +37,15 @@ const CategoryChart = ({ chartData }: CategoryChartProps) => {
                     dataKey="category"
                     axisLine={false}
                     tickLine={false}
-                    tick={{ fill: '#222', fontSize: 14, fontWeight: 'bold' }}
+                    tick={{ fill: theme === 'dark' ? '#dddddd' : '#222222', fontSize: 14, fontWeight: 'bold' }}
                 />
                 <YAxis
                     domain={[0, 'dataMax']}
                     axisLine={false}
                     tickLine={false}
-                    tick={{ fill: '#333', fontSize: 14, fontWeight: 'bold' }}
+                    tick={{ fill: theme === 'dark' ? '#cccccc' : '#333333', fontSize: 14, fontWeight: 'bold' }}
                 />
-                <Tooltip content={<CustomTooltip />} />
+                <Tooltip content={<CustomTooltip theme={theme} />} />
                 {chartData.map(({ category }) => (
                     <Bar
                         dataKey="amount"
