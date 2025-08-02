@@ -7,7 +7,7 @@ const useFilteredExpenses = () => {
     const selectedMonth = useAppSelector((state) => state.expenses.selectedMonth);
 
     const filteredExpenses = useMemo(
-        () => expenses.filter((exp: Expense) => exp.date === selectedMonth),
+        () => expenses.filter((exp: Expense) => exp.date.startsWith(selectedMonth)),
         [expenses, selectedMonth]
     );
 
