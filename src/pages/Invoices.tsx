@@ -8,9 +8,9 @@ import { useDispatch } from 'react-redux';
 import { addInvoice, selectInvoice } from '../features/invoices/invoiceSlice';
 
 const statusColorMap: { [key: string]: string } = {
-    paid: 'bg-green-400',
-    pending: 'bg-red-400',
-    draft: 'bg-gray-400',
+    paid: 'bg-green-300',
+    pending: 'bg-red-300',
+    draft: 'bg-gray-300',
 };
 
 const Invoices = () => {
@@ -91,7 +91,7 @@ const Invoices = () => {
                                         id={inv.id}
                                         amount={inv.items.reduce((sum, item) => sum + item.rate * item.quantity, 0)}
                                         date={inv.date}
-                                        icon={<ClipboardList size={20} className="text-gray-800 dark:text-gray-100" />}
+                                        icon={<ClipboardList size={20} className="text-gray-800" />}
                                         onEdit={() => {
                                             dispatch(selectInvoice(inv.id));
                                             setIsEditMode(true);

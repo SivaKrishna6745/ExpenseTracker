@@ -4,10 +4,11 @@ import CustomBar from './CustomBar';
 import useSettings from '../hooks/useSettings';
 
 type CategoryChartProps = {
-    chartData: { category: string; amount: number; fillColor: string }[];
+    chartData: { category: string; [key: string]: any; fillColor: string }[];
+    entry: 'expense' | 'invoice';
 };
 
-const CategoryChart = ({ chartData }: CategoryChartProps) => {
+const CategoryChart = ({ entry, chartData }: CategoryChartProps) => {
     const { theme } = useSettings();
 
     return (
@@ -45,10 +46,10 @@ const CategoryChart = ({ chartData }: CategoryChartProps) => {
                     tickLine={false}
                     tick={{ fill: theme === 'dark' ? '#cccccc' : '#333333', fontSize: 14, fontWeight: 'bold' }}
                 />
-                <Tooltip content={<CustomTooltip theme={theme} />} />
+                <Tooltip content={<CustomTooltip metric={entry === 'expense' ? 'amount' : 'count'} theme={theme} />} />
                 {chartData.map(({ category }) => (
                     <Bar
-                        dataKey="amount"
+                        dataKey={'amount'}
                         barSize={50}
                         fill={`url(#gradient-${category})`}
                         activeBar={false}

@@ -17,9 +17,9 @@ const Dashboard = () => {
     const { totalAmount, invoicesCount, recentInvoices } = useInvoiceSummary();
     const { totalExpenseAmount, expensesCount, recentExpenses } = useExpenseSummary();
     const { currency } = useSettings();
+
     const { filteredExpenses } = useFilteredExpenses();
     let filteredExpenseCategories: ExpenseCategory[] = [];
-
     const catergoryTotals: { [key: string]: number } = {};
     filteredExpenses.forEach((exp: Expense) => {
         filteredExpenseCategories.push(exp.category);
@@ -35,7 +35,6 @@ const Dashboard = () => {
     missingExpenseCategories.map((exp) => {
         catergoryTotals[exp] = 1;
     });
-
     const chartData = Object.entries(catergoryTotals).map(([category, amount]) => ({
         category,
         amount,
@@ -122,7 +121,7 @@ const Dashboard = () => {
                     </div>
                 ))}
                 <div className="flex justify-center items-center">
-                    <CategoryChart chartData={chartData} />
+                    <CategoryChart chartData={chartData} entry="expense" />
                 </div>
             </div>
             <div className="mb-4 flex flex-col gap-4">
@@ -140,13 +139,13 @@ const Dashboard = () => {
                             amount={inv.items.reduce((acc, item) => acc + item.quantity * item.rate, 0)}
                             date={inv.date}
                             currency={currency}
-                            icon={<ClipboardList size={20} className="text-gray-800 dark:text-gray-100" />}
+                            icon={<ClipboardList size={20} className="text-gray-800" />}
                             dashboard
                         />
                     </div>
                 ))}
                 <div className="flex justify-center items-center">
-                    <CategoryChart chartData={invoiceChartData} />
+                    <CategoryChart chartData={invoiceChartData} entry="invoice" />
                 </div>
             </div>
         </div>

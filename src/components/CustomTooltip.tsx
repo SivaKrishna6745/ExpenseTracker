@@ -8,9 +8,10 @@ type CustomTooltipProps = {
     payload?: TooltipPayload[];
     label?: string;
     theme: string;
+    metric: String;
 };
 
-const CustomTooltip = ({ active, payload, label, theme }: CustomTooltipProps) => {
+const CustomTooltip = ({ active, payload, label, theme, metric }: CustomTooltipProps) => {
     if (!active || !payload || !payload.length) return null;
     return (
         <div
@@ -23,7 +24,9 @@ const CustomTooltip = ({ active, payload, label, theme }: CustomTooltipProps) =>
             }}
         >
             <p style={{ margin: 0, fontWeight: 'bold', textTransform: 'capitalize' }}>Category: {label}</p>
-            <p style={{ margin: 0 }}>Amount: {payload[0].value.toLocaleString('en-IN')}</p>
+            <p style={{ margin: 0 }}>
+                {metric}: {payload[0].value.toLocaleString('en-IN')}
+            </p>
         </div>
     );
 };

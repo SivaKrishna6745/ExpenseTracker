@@ -21,7 +21,7 @@ const InvoiceCard = ({ id, amount, date, currency, icon, onEdit, dashboard }: In
 
     return (
         <>
-            <div className="p-3.5 flex justify-between items-center font-semibold">
+            <div className="p-3.5 flex justify-between items-center font-semibold dark:text-gray-800">
                 <div>
                     <span>{icon}</span>
                 </div>
