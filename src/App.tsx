@@ -12,7 +12,7 @@ function App() {
     }, [settings.theme]);
 
     return (
-        <BrowserRouter>
+        <BrowserRouter basename="/ExpenseTracker">
             <Navbar />
             <AppRoutes />
         </BrowserRouter>
